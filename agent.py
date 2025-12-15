@@ -38,10 +38,10 @@ def capture_image():
         return None
 
     log("Camera Sensor: INITIALIZED (Index 0)")
-    ret, frame = cam.read()
+    isTrue, frame = cam.read()
     cam.release()
 
-    if not ret:
+    if not isTrue:
         log("Capture Status: FAILED")
         return None
 
@@ -64,6 +64,7 @@ def upload_image(filepath):
         response = requests.post(SERVER_URL, files=files, data=data)
 
         log(f"Server Response: {response.status_code}")
+
     except Exception as e:
         log(f"Upload Failed: {e}")
 
